@@ -91,10 +91,6 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <p>Avatar actuel :<img src="<?= $data['discord_avatar']?>" class="img-update"></p>
-                            </div>
-
                             <div class="col-lg-12 loginbttm text-center mt-15">
                                 <div class="col-lg-6 login-btm login-button">
                                     <a href="profile.php" class="btn btn-outline-danger w-80">RETOUR</a>

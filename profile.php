@@ -86,14 +86,20 @@
                 <p><span class="profile-label">Discord lié</span> <span class="green-text"><i class="fa fa-check" aria-hidden="true"></i></span></p>
                 <p><span class="profile-label">ID discord :</span> <?=$data['discord_id']?></p>
                 <p><span class="profile-label">Pseudo discord :</span> <?=$data['discord_username']?></p>
-                <div class="col-lg-6 text-center discord-button">
-                    <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/link-discord.php", "identify email guilds"); ?>" class="btn btn-discord w-80">Mettre à jour Discord</a>
+                <div class="col-md-12">
+                    <div class="col-md-6 text-center">
+                        <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/link-discord.php", "identify email guilds"); ?>" class="btn btn-discord w-80">Mettre à jour Discord</a>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <a href="unlink-discord.php" class="btn btn-discord w-80">Supprimer Discord</a>
+                    </div>
                 </div>
             <?php }else{ ?>
                 <p><span class="profile-label">Discord lié :</span> <span class="red-text"><i class="fa fa-times" aria-hidden="true"></i></span></p>
                 <div class="col-lg-6 text-center discord-button">
                     <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/link-discord.php", "identify email guilds"); ?>" class="btn btn-discord w-80">Lier mon compte Discord</a>
                 </div>
+                
             <?php } ?>
             
         </div>
@@ -123,7 +129,7 @@
                 </a>
             </div>
         <?php }else{ ?>
-            <div class="col-md-12 col-sm-12 col-xs-12 padding-0">
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-0 mb-50">
                 <a href="profile-update.php">
                     <div class="profile-box text-center red-hover">
                             <h4>Modifier mon profil</h4>
