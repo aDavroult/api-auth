@@ -24,7 +24,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <title>Connexion</title>
+    <title>Inscription</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -49,10 +49,10 @@
             <div class="col-lg-3 col-md-2"></div>
             <div class="col-lg-6 col-md-8 login-box">
                 <div class="col-lg-12 login-icon">
-                    <i class="fa fa-key" aria-hidden="true"></i>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
                 </div>
                 <div class="col-lg-12 login-title">
-                    CONNEXION
+                    INSCRIPTION
                 </div>
 
                 <div class="col-lg-12 login-form">
@@ -64,13 +64,21 @@
                                 <input type="text" class="form-control" name="pseudo" placeholder="Votre pseudonyme">
                             </div>
                             <div class="form-group">
+                                <label class="form-control-label">MAIL</label>
+                                <input type="text" class="form-control" name="mail" placeholder="Votre adresse mail">
+                            </div>
+                            <div class="form-group">
                                 <label class="form-control-label">MOT DE PASSE</label>
                                 <input type="password" class="form-control" name="pass" placeholder="Votre mot de passe">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">CONFIRMATION DE MOT DE PASSE</label>
+                                <input type="password" class="form-control" name="passverif" placeholder="Retapez votre mot de passe">
                             </div>
 
                             <div class="col-lg-12 loginbttm" style="text-align:center">
                                 <div class="col-lg-12 login-btm login-button">
-                                    <button type="submit" name="submit_connexion" class="btn btn-outline-danger">CONNEXION</button>
+                                    <button type="submit" name="submit_inscription"  class="btn btn-outline-danger">S'INSCRIRE</button>
                                 </div>
                             </div>
                         </form>
