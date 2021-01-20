@@ -1,6 +1,6 @@
 <header class="header-section clearfix">
-		<a href="index.html" class="site-logo">
-			<img src="img/logo.png" alt="">
+		<a href="index.php" class="site-logo">
+			<img src="http://calais.simplon.co/wp-content/uploads/2020/03/logo-simplon.png" style="max-height:40px" alt="">
 		</a>
 		<div class="header-right">
 		<?php if(isset($_SESSION['user-id'])  || (isset($_SESSION['user_id']))){ ?>
@@ -20,5 +20,8 @@
 		<ul class="main-menu">
 			<li><a href="index.php">Accueil</a></li>
 			<li><a href="teams.php">Equipes</a></li>
+			<li><a href="api-user.php">API USERS</a></li>
+			<li><a href="api-team.php">API TEAMS</a></li>
+			<li><a href="api.php">API</a></li>
 		</ul>
 	</header>
