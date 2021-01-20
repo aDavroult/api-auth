@@ -20,8 +20,8 @@
 		<ul class="main-menu">
 			<li><a href="index.php">Accueil</a></li>
 			<li><a href="teams.php">Equipes</a></li>
-			<li><a href="api-user.php" target="_blank">API USERS</a></li>
-			<li><a href="api-team.php" target="_blank">API TEAMS</a></li>
-			<li><a href="api.php" target="_blank">API</a></li>
+			<li><a href="api/api-user.php" target="_blank">API USERS</a></li>
+			<li><a href="api/api-team.php" target="_blank">API TEAMS</a></li>
+			<li><a href="api/api.php" target="_blank">API</a></li>
 		</ul>
 	</header>
