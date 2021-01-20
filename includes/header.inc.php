@@ -3,7 +3,7 @@
 			<img src="img/logo.png" alt="">
 		</a>
 		<div class="header-right">
-		<?php if(isset($_SESSION['user-id'])){ ?>
+		<?php if(isset($_SESSION['user-id'])  || (isset($_SESSION['user_id']))){ ?>
 			<div class="user-panel">
 				<a href="profile.php" class="login">Mon profil</a>
 				<span>|</span>

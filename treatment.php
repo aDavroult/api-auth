@@ -63,27 +63,34 @@ include 'includes/bdd.inc.php';
 	// CONNEXION
 	if(isset($_POST['submit_connexion'])){
 
-		$requete = $bdd -> prepare('SELECT * FROM users WHERE pseudo = :pseudo ');
-		$requete -> execute(array(
-			'pseudo'=>$_POST['pseudo'],
-		));
+        if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
 
-        $donnees = $requete -> fetch();
+            $requete = $bdd -> prepare('SELECT * FROM users WHERE pseudo = :pseudo ');
+            $requete -> execute(array(
+                'pseudo'=>$_POST['pseudo'],
+            ));
+
+            $donnees = $requete -> fetch();
 
 
-		if($_POST['pass'] == $donnees['password']){
-            
-           session_start();
-            $_SESSION['user-id'] = $donnees['id'];
-			$_SESSION['notification'] = '
-			<div class="notification" role="alert">Connexion réussie !</div>';
+            if($_POST['pass'] == $donnees['password']){
+                
+                session_start();
+                $_SESSION['user-id'] = $donnees['id'];
+                $_SESSION['notification'] = '
+                <div class="notification" role="alert">Connexion réussie !</div>';
 
-			header("Location: profile.php");
-		}else{
-			$_SESSION['notification'] = '
-			<div class="erreur" role="alert">Mot de passe incorrect !</div>';
-			header("Location: login.php");
-		}
+                header("Location: profile.php");
+            }else{
+                $_SESSION['notification'] = '
+                <div class="erreur" role="alert">Mot de passe incorrect !</div>';
+                header("Location: login.php");
+            }
+        }else{
+            $_SESSION['notification'] = '
+            <div class="erreur" role="alert">Les deux champs sont requis !</div>';
+            header("Location: login.php");
+        }
 		
 	}
 
@@ -91,6 +98,7 @@ include 'includes/bdd.inc.php';
 	// MISE A JOUR DES DONNEES
 	if(isset($_POST['update_profile'])){
 
+        if(isset($_SESSION['user-id'])){
 			$pseudo = $_POST['pseudo'];
 			$mail = $_POST['mail'];
 			$age = $_POST['age'];
@@ -109,7 +117,31 @@ include 'includes/bdd.inc.php';
 			$_SESSION['notification'] = "
 			<div class='succes' role='alert'>Profil mis à jour !</div>";
 			
-			header("Location: profile.php");
+            header("Location: profile.php");
+
+        }elseif(isset($_SESSION['user_id'])){
+
+            $pseudo = $_POST['pseudo'];
+			$mail = $_POST['mail'];
+			$age = $_POST['age'];
+			$description = $_POST['description'];
+			$team = $_POST['team'];
+			$req = $bdd->prepare('UPDATE users SET pseudo=:pseudo, mail=:mail, age=:age, description=:description ,team=:team WHERE discord_id=:id');
+			$id = $_SESSION['user_id'];
+			$req->bindParam(":id",$id);
+			$req->bindParam(":pseudo",$pseudo);
+			$req->bindParam(":mail",$mail);
+			$req->bindParam(":age",$age);
+			$req->bindParam(":description",$description);
+			$req->bindParam(":team",$team);
+			$req->execute();
+
+			$_SESSION['notification'] = "
+			<div class='succes' role='alert'>Profil mis à jour !</div>";
+			
+            header("Location: profile.php");
+
+        }
 
 	}
 	

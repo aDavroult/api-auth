@@ -1,22 +1,33 @@
 <?php
 
- include 'includes/session.inc.php';
+    include 'includes/session.inc.php';
 
- include 'includes/bdd.inc.php';
+    include 'includes/bdd.inc.php';
 
- require __DIR__ . "/includes/functions.php";
- require __DIR__ . "/includes/discord.php";
+    require __DIR__ . "/includes/functions.php";
+    require __DIR__ . "/includes/discord.php";
 
-	if(isset($_SESSION['user-id'])){
-    //RECUPERATION DES DONNEES
-    $req = $bdd->prepare('SELECT * FROM users WHERE id = :id');
-    $id = $_SESSION['user-id'];
-    $req->bindParam(":id",$id);
-    $req->execute();
+    if(isset($_SESSION['user-id'])){
+        //RECUPERATION DES DONNEES VIA ID
+        $req = $bdd->prepare('SELECT * FROM users WHERE id = :id');
+        $id = $_SESSION['user-id'];
+        $req->bindParam(":id",$id);
+        $req->execute();
 
-	$data = $req->fetch();
+        $data = $req->fetch();
+    
+
+    }elseif(isset($_SESSION['user_id'])){
+        //RECUPERATION DES DONNEES VIA DISCORD ID
+        $req = $bdd->prepare('SELECT * FROM users WHERE discord_id = :id');
+        $id = $_SESSION['user_id'];
+        $req->bindParam(":id",$id);
+        $req->execute();
+
+        $data = $req->fetch();
+    }
 	
-	}
+
 
 ?>
 
@@ -87,18 +98,86 @@
                 <p><span class="profile-label">ID discord :</span> <?=$data['discord_id']?></p>
                 <p><span class="profile-label">Pseudo discord :</span> <?=$data['discord_username']?></p>
                 <div class="col-md-12">
+
                     <div class="col-md-6 text-center">
-                        <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/link-discord.php", "identify email guilds"); ?>" class="btn btn-discord w-80">Mettre à jour Discord</a>
+                        <a class="btn btn-discord w-80 mt-15" data-toggle="modal" data-target="#confirmLink">
+                            Mettre à jour Discord
+                        </a>
                     </div>
+
+                    <div class="modal fade" id="confirmLink" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title pink-icon" id="exampleModalLabel">Validation de la mise à jour Discord</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Souhaitez vous vraiment mettre à jour votre Discord via Discord ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/link-discord.php", "identify email guilds"); ?>" class="btn btn-discord">Mettre à jour Discord</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-md-6 text-center">
-                        <a href="unlink-discord.php" class="btn btn-discord w-80">Supprimer Discord</a>
+                        <a class="btn btn-discord w-80 mt-15" data-toggle="modal" data-target="#confirmUnlink">
+                            Supprimer Discord
+                        </a>
+                    </div>
+
+                    <div class="modal fade" id="confirmUnlink" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title pink-icon" id="exampleModalLabel">Validation de la suppression</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Souhaitez vous vraiment supprimer la liaison Discord de votre profil ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                <a href="unlink-discord.php" class="btn btn-discord">Supprimer Discord</a>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php }else{ ?>
                 <p><span class="profile-label">Discord lié :</span> <span class="red-text"><i class="fa fa-times" aria-hidden="true"></i></span></p>
-                <div class="col-lg-6 text-center discord-button">
-                    <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/link-discord.php", "identify email guilds"); ?>" class="btn btn-discord w-80">Lier mon compte Discord</a>
-                </div>
+                    <div class="col-md-6 text-center">
+                        <a class="btn btn-discord w-80 mt-15" data-toggle="modal" data-target="#confirmDiscordLink">
+                            Lier mon Discord
+                        </a>
+                    </div>
+
+                    <div class="modal fade" id="confirmDiscordLink" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title pink-icon" id="exampleModalLabel">Validation de la liaison Discord</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Souhaitez vous vraiment lier votre Discord à votre profil ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/link-discord.php", "identify email guilds"); ?>" class="btn btn-discord">Lier mon Discord</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 
             <?php } ?>
             

@@ -5,16 +5,25 @@
  include 'includes/bdd.inc.php';
 
 
-	if(isset($_SESSION['user-id'])){
-    //RECUPERATION DES DONNEES
+ if(isset($_SESSION['user-id'])){
+    //RECUPERATION DES DONNEES VIA ID
     $req = $bdd->prepare('SELECT * FROM users WHERE id = :id');
     $id = $_SESSION['user-id'];
     $req->bindParam(":id",$id);
     $req->execute();
 
-	$data = $req->fetch();
-	
-	}
+    $data = $req->fetch();
+
+
+}elseif(isset($_SESSION['user_id'])){
+    //RECUPERATION DES DONNEES VIA DISCORD ID
+    $req = $bdd->prepare('SELECT * FROM users WHERE discord_id = :id');
+    $id = $_SESSION['user_id'];
+    $req->bindParam(":id",$id);
+    $req->execute();
+
+    $data = $req->fetch();
+}
 
 ?>
 
@@ -77,13 +86,13 @@
 
                             <div class="form-group">
                                 <label class="form-control-label">Description</label>
-                                <input type="text" class="form-control" name="description" id="description" value="<?= $data['description']?>" placeholder="Votre description"/>
+                                <input type="text" class="form-control" name="description" id="description" value="<?php if(isset($data['description'])){ echo $data['description'];}?>" placeholder="Votre description"/>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-control-label">Choisir une équipe:</label>
                                 <select name="team" id="team" class="form-control">
-                                    <option selected>Choisissez...</option>
+                                    <option value="Aucune">Aucune</option>
                                     <option <?php if($data['team'] == 'G2 Esports') { echo 'selected';}?> value="G2 Esports">G2 Esports</option>
                                     <option <?php if($data['team'] == 'Team Vitality') { echo 'selected';}?> value="Team Vitality">Team Vitality</option>
                                     <option <?php if($data['team'] == 'Team Liquid') { echo 'selected';}?> value="Team Liquid">Team Liquid</option>

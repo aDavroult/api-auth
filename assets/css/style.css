@@ -244,6 +244,11 @@ Helper CSS
 	background: #7289da;
 }
 
+.btn {
+	border-radius:0;
+	border:inherit;
+}
+
 
 .mt-15{
 	margin-top:15px;
@@ -620,6 +625,14 @@ label {
 
 .mh-100{
 	height: 100px;
+}
+
+/* MODAL */
+
+.modal-content {
+    background-color: #f2f2f2;
+    border: inherit;
+    border-radius: inherit;
 }
 
 /* Tablet :768px. */

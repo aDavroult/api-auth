@@ -4,6 +4,9 @@
 
  include 'includes/bdd.inc.php';
 
+ require __DIR__ . "/includes/functions-login.php";
+ require __DIR__ . "/includes/discord-login.php";
+
 
 	if(isset($_SESSION['user-id'])){
     //RECUPERATION DES DONNEES
@@ -46,8 +49,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-2"></div>
-            <div class="col-lg-6 col-md-8 login-box">
+            <div class="col-md-7 col-sm-12 col-xs-12 login-box">
                 <div class="col-lg-12 login-icon">
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>
@@ -72,12 +74,17 @@
                                 <div class="col-lg-12 login-btm login-button">
                                     <button type="submit" name="submit_connexion" class="btn btn-outline-danger">CONNEXION</button>
                                 </div>
+                                
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            <div class="offset-md-1 col-md-4 col-sm-12 col-xs-12 login-box">
+                <a href="<?php echo url("801009477456756737", "http://localhost/api-auth/login-discord.php", "identify email guilds"); ?>" class="btn btn-discord w-80 mt-15">Connexion via Discord</a>
+            </div>
         </div>
+        
 
 
         <?php 
