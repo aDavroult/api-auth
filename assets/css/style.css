@@ -471,6 +471,7 @@ label {
 
 .btn-outline-danger {
     border-color: #fc0254;
+	background-color: #fc0254;
     color: #f7f7f7;
     border-radius: 0px;
     font-weight: bold;
