@@ -9,13 +9,13 @@ $req = $bdd->prepare("SELECT * FROM teams");
 $req->execute();
 
 $retour['message'] ['teams']= "Liste des equipes";
-$retour['results'] ['teams'] = $req->fetchAll();
+$retour['results'] ['teams'] = $req->fetchAll(PDO::FETCH_ASSOC);
 
 $req = $bdd->prepare("SELECT pseudo, discord_id, discord_username, discord_tag, age, description,team  FROM users");
 $req->execute();
 
 $retour['message'] ['users']= "Liste des utilisateurs";
-$retour['results'] ['users'] = $req->fetchAll();
+$retour['results'] ['users'] = $req->fetchAll(PDO::FETCH_ASSOC);
 
 
 echo json_encode($retour, JSON_PRETTY_PRINT);
